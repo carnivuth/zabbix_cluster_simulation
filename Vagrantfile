@@ -6,7 +6,7 @@ Vagrant.configure('2') do |config|
   config.vm.define 'zabbix-server' do |machine|
     machine.vm.hostname = 'zabbix-server'
     machine.vm.network 'forwarded_port', id: 'ssh', host: 2221, guest: 22
-    machine.vm.network 'forwarded_port', id: 'zabbix-console', host: 8443, guest: 8443
+    machine.vm.network 'forwarded_port', id: 'zabbix-console', host: 8888, guest: 80
     machine.vm.network 'private_network', virtualbox__intnet: 'zabbix-cluster', ip: '10.0.0.10'
   end
 
