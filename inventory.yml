@@ -1,0 +1,42 @@
+---
+monitored_nodes:
+  hosts:
+    monitored_node_1:
+    monitored_node_2:
+    monitored_node_3:
+all:
+  hosts:
+    zabbix_server:
+      ansible_user: vagrant
+      ansible_host: 127.0.0.1
+      ansible_port: 2221
+      ansible_hostname: zabbix-server
+      ansible_ssh_private_key_file: .vagrant/machines/zabbix-server/virtualbox/private_key
+      zabbix_server_database: mysql
+      zabbix_server_database_long: mysql
+      zabbix_server_dbport: 3306
+      zabbix_server_dbpassword: zabbix
+      zabbix_server_mysql_login_user: root
+      zabbix_server_mysql_login_password: root
+      zabbix_api_server_url: 'localhost:8443'
+
+    monitored_node_1:
+      ansible_user: vagrant
+      ansible_host: 127.0.0.1
+      ansible_port: 2222
+      ansible_hostname: monitored-node-1
+      ansible_ssh_private_key_file: .vagrant/machines/monitored-node-1/virtualbox/private_key
+
+    monitored_node_2:
+      ansible_user: vagrant
+      ansible_host: 127.0.0.1
+      ansible_port: 2223
+      ansible_hostname: monitored-node-2
+      ansible_ssh_private_key_file: .vagrant/machines/monitored-node-2/virtualbox/private_key
+
+    monitored_node_3:
+      ansible_user: vagrant
+      ansible_host: 127.0.0.1
+      ansible_port: 2224
+      ansible_hostname: monitored-node-3
+      ansible_ssh_private_key_file: .vagrant/machines/monitored-node-3/virtualbox/private_key
