@@ -1,0 +1,33 @@
+---
+- name: Install zabbix server
+  hosts: zabbix_server
+  become: true
+  roles:
+    - geerlingguy.apache
+    - geerlingguy.php
+    - geerlingguy.mysql
+    - community.zabbix.zabbix_server
+    - community.zabbix.zabbix_web
+
+- name: Provision monitored nodes
+  hosts: monitored_nodes
+  become: true
+  tasks:
+
+    - name: Install snmp agent
+      ansible.builtin.apt:
+        name: snmpd
+        state: present
+        update_cache: true
+
+    - name: enable agent on all interfaces
+      ansible.builtin.lineinfile:
+        path: /etc/snmp/snmpd.conf
+        regex: 'agentaddress  .*'
+        line: 'agentaddress  0.0.0.0,[::1]'
+        state: present
+
+    - name: Restart snmp agent
+      ansible.builtin.service:
+        name: snmpd
+        state: restarted
